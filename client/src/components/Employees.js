@@ -32,6 +32,7 @@ const Employees = ({token}) => {
     );
 
     const [btn_title, setBtnTitle] = useState(null);
+    const [title, setTitle] = useState('');
     const [editEmployeeId, setEditEmployeeId] = useState('');
     const [modal, setModal] = useState(false);
 
@@ -130,6 +131,7 @@ const Employees = ({token}) => {
     };
 
     const openAddModal = ()=>{
+        setTitle('Add form');
         setBtnTitle('Add');
         setModal(true);
     }
@@ -143,6 +145,7 @@ const Employees = ({token}) => {
         }
 
         setValues(vals);
+        setTitle('Edit form');
         setBtnTitle('Update');
         setModal(true);
     }
@@ -165,6 +168,7 @@ const Employees = ({token}) => {
                 toggleModal={toggleModal}
                 handleChange={handleChange}
                 handleModalSubmit={handleSubmit}
+                title={title}
                 btn_title={btn_title} 
                 values={values}
                 errors={errors}
