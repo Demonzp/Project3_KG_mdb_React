@@ -12,12 +12,12 @@ import {
     Form
 } from 'reactstrap';
 
-const ModalEmployees = ({ modal, toggleModal, handleModalSubmit, handleChange, btn_title, values, errors })=>{
+const ModalEmployees = ({ modal, toggleModal, handleModalSubmit, handleChange, btn_title, title, values, errors })=>{
     //console.log('values = ', values);
     return(
         <Modal isOpen={modal} toggle={toggleModal}>
             <Form onSubmit={handleModalSubmit}>
-                <ModalHeader toggle={toggleModal}>Add new employee</ModalHeader>
+                <ModalHeader toggle={toggleModal}>{ title }</ModalHeader>
                 <ModalBody>
                     <FormGroup>
                         <div>
