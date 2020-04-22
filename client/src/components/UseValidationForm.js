@@ -27,6 +27,7 @@ const UseValidationForm = (callback, initialState = {}, Validation) => {
 
     const handleReset = (event) => {
         //console.log('Reset completed.');
+        setIsSubmitting(false);
         setErrors({});
         setValues(initialState);
     };
