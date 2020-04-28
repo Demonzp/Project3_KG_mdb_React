@@ -15,6 +15,7 @@ import UsePaginator from './paginator';
 const Employees = ({token}) => {
 
     const [employees, setEmployees] = useState([]);
+    const [needUpdate, setNeedUpdate] = useState(0);
 
     const initialState ={
         name:'',
@@ -50,27 +51,39 @@ const Employees = ({token}) => {
         if(page===0){
             return;
         }
-        getEmployees();
-    }, [page,limit]);
+
+        let isCurrent = true;
+
+        getEmployees()
+        .then((res) =>{
+            if(isCurrent){
+                parseData(res.data);
+            }
+        })
+        .catch((err) => {
+            if(isCurrent){
+                console.error(err);
+            }
+        });
+
+        return ()=>{isCurrent = false}
+    }, [page,limit,needUpdate]);
 
     const parseData=(data)=>{
-        if(data.page!==page || data.limit!==limit){
-            return;
-        }
         setPages(data.pages);
         setEmployees(data.docs);
     };
 
     // GET (+ mongoose-pagination)
-    const getEmployees = () => {
-        axios({
+    const getEmployees = ()=>{
+        return axios({
             method: 'get',
             url: `http://localhost:5000/employees/?page=${page}&limit=${limit}`,
             headers:{'Authorization':token}
         })
-        .then((res) =>parseData(res.data))
-        .catch((err) => console.error(err));
-    };
+        .then((res) => res)
+        .catch((err) => Promise.reject(err));
+    }
 
     // POST
     const addEmployee = () => {
@@ -81,7 +94,7 @@ const Employees = ({token}) => {
             data: values
         })
         .then((res) => {
-            getEmployees();
+            setNeedUpdate(needUpdate+1);
             toggleModal();
         })
         .catch((err)=>{
@@ -101,7 +114,7 @@ const Employees = ({token}) => {
             data: values
         })
         .then((res) => {
-            getEmployees();
+            setNeedUpdate(needUpdate+1);
             toggleModal();
         })
         .catch((err)=>{
@@ -120,7 +133,7 @@ const Employees = ({token}) => {
             headers: {'Authorization':token}
         })
         .then(() => {
-            getEmployees();
+            setNeedUpdate(needUpdate+1);
         })
         .catch((err)=>{
             console.error(err);
