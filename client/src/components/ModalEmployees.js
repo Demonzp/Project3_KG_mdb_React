@@ -12,8 +12,8 @@ import {
     Form
 } from 'reactstrap';
 
-const ModalEmployees = ({ modal, toggleModal, handleModalSubmit, handleChange, btn_title, title, values, errors })=>{
-    //console.log('values = ', values);
+const ModalEmployees = ({ modal, toggleModal, handleModalSubmit, handleChange, btnTitle, title, values, errors })=>{
+   
     return(
         <Modal isOpen={modal} toggle={toggleModal}>
             <Form onSubmit={handleModalSubmit}>
@@ -63,7 +63,7 @@ const ModalEmployees = ({ modal, toggleModal, handleModalSubmit, handleChange, b
                     </FormGroup>
                 </ModalBody>
                 <ModalFooter>
-                    <Button type='submit' color='primary'>{btn_title}</Button>{' '}
+                    <Button type='submit' color='primary'>{btnTitle}</Button>{' '}
                     <Button color='secondary' onClick={toggleModal}>CANCEL</Button>
                 </ModalFooter>
             </Form>

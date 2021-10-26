@@ -10,7 +10,7 @@ module.exports = (app) => {
         User.findOne({ email }).then((user) => {
             // Если пользователь с заданным email не найден, то выдаст ошибку.
             if (!user) {
-                res.status(401).json({ message: 'User does not exist!' });
+                throw new Error('User does not exist!');
             }
             // Если найден - сравнение захешированных паролей при помощи функции compare от bcrypt.
             const valid = bcrypt.compareSync(password, user.password);

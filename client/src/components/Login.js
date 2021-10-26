@@ -4,14 +4,9 @@ import { Login as ValidationLogin } from '../validation';
 import { Container, Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import './ValidationForm.css';
 import axios from 'axios';
-// {
-//     _id: "5e8b5f0c61013e15a4b0f516", 
-//     login: "Bob", 
-//     email: "bob@gma.com", 
-//     password: "123"
-// }
+
 const Login = ({auth}) => {
-    const [res_error, setResponsError] = useState({});
+    const [resError, setResponsError] = useState({});
 
     const { handleChange, handleSubmit, values, errors } = UseValidationForm(
         submit,
@@ -62,7 +57,7 @@ const Login = ({auth}) => {
                     </div>
                 </FormGroup>
                 <div>
-                    {res_error && <p className='error'>{res_error.message}</p>}
+                    {resError && <p className='error'>{resError.message}</p>}
                 </div>
                 <Button type='submit' color='primary' size='sm'>SUBMIT</Button>
             </Form>

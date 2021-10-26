@@ -21,7 +21,7 @@ const Registration = () => {
 
     const history = useHistory();
 
-    const [res_error, setResponsError] = useState({});
+    const [resError, setResponsError] = useState({});
 
     const { handleChange, handleSubmit, values, errors } = UseValidationForm(
         submit,
@@ -90,7 +90,7 @@ const Registration = () => {
                         </FormGroup>
                         <FormGroup>
                             <div>
-                                {res_error && <p className='error'>{res_error.message}</p>}
+                                {resError && <p className='error'>{resError.message}</p>}
                             </div>
                         </FormGroup>
                         <Button color='primary' type='submit'>Registration</Button>

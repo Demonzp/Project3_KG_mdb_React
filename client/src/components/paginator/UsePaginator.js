@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { 
     FormGroup,
@@ -9,7 +9,7 @@ import {
     Input
 } from 'reactstrap';
 
-import Pagination from "react-js-pagination";
+import Pagination from 'react-js-pagination';
 
 import './paginator.css';
 
@@ -19,25 +19,25 @@ const UsePaginator = (pages) =>{
     const history = useHistory();
     const [page, setPage] = useState(0);
     const [limit, setLimit] = useState(2);
-    const [total_items, setTotalItems] = useState(0);
-    const [el_paginate, setElPaginate] = useState(null);
-    const [el_limite, setElLimite] = useState(null);
-    const arr_limits = [1,2,3,5,10];
+    const [totalItems, setTotalItems] = useState(0);
+    const [elPaginate, setElPaginate] = useState(null);
+    const [elLimite, setElLimite] = useState(null);
+    const arrLimits = [1,2,3,5,10];
 
     useEffect(() => {
-        let t_url_page = Number(new URLSearchParams(location.search).get('page'));
-        if(t_url_page<=0){
-            t_url_page = 1;
-        }else if(pages>0 && t_url_page>pages){
+        let tUrlPage = Number(new URLSearchParams(location.search).get('page'));
+        if(tUrlPage<=0){
+            tUrlPage = 1;
+        }else if(pages>0 && tUrlPage>pages){
             onHistory(pages);
             return;
         }
-        setPage(t_url_page);
+        setPage(tUrlPage);
     }, [location]);
 
     useEffect(()=>{
-        let t_url_page = Number(new URLSearchParams(location.search).get('page'));
-        if(pages>0 && t_url_page>pages){
+        let tUrlPage = Number(new URLSearchParams(location.search).get('page'));
+        if(pages>0 && tUrlPage>pages){
             onHistory(pages);
         }
         setTotalItems(pages*limit);
@@ -46,7 +46,7 @@ const UsePaginator = (pages) =>{
 
     useEffect(() => {
         setElPaginate(renderElPaginate());
-    }, [total_items, page]);
+    }, [totalItems, page]);
 
     const handlerPageChange = (p)=>{
         onHistory(p);
@@ -70,7 +70,7 @@ const UsePaginator = (pages) =>{
                     linkClass="page-link"
                     activePage={page}
                     itemsCountPerPage={limit}
-                    totalItemsCount={total_items}
+                    totalItemsCount={totalItems}
                     pageRangeDisplayed={5}
                     onChange={handlerPageChange}
                 />
@@ -84,7 +84,7 @@ const UsePaginator = (pages) =>{
                 <Label for="exampleSelect" sm={2}>Items show on page:</Label>
                 <Col className="select-limit">
                 <Input type="select" name="limit" id="limit" value={limit} onChange={selectLimit}>
-                    {arr_limits.map((el)=>{
+                    {arrLimits.map((el)=>{
                         return <option key={el}>{el}</option>
                     })}
                 </Input>
@@ -94,8 +94,8 @@ const UsePaginator = (pages) =>{
     }
 
     return{
-        el_paginate,
-        el_limite,
+        elPaginate,
+        elLimite,
         page,
         limit
     }

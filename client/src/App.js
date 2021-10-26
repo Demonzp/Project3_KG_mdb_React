@@ -10,8 +10,8 @@ import Registration from './components/Registration';
 import { GuestRoute, PrivateRoute } from './routes';
 
 function App() {
-    const [is_login, setIsLogin] = useState(false);
-    const [is_loading, setIsLoading] = useState(true);
+    const [isLogin, setIsLogin] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [token, setToken] = useState(null);
 
     useEffect(()=>{
@@ -39,20 +39,20 @@ function App() {
             <div className="App">
                 <NavPanel 
                     logOut={auth}
-                    isLogin={is_login}
+                    isLogin={isLogin}
                 />
                     <Route path="/"
                         render={() => <h2>Project_KG_mdb_React</h2>}
                         exact
                     />
                     <Route path='/about' component={About} />
-                    <GuestRoute path="/login" isLoading={is_loading} isAuthenticated={is_login}>
+                    <GuestRoute path="/login" isLoading={isLoading} isAuthenticated={isLogin}>
                             <Login auth={auth}/>
                     </GuestRoute>
-                    <PrivateRoute path="/employees" isLoading={is_loading} isAuthenticated={is_login}>
+                    <PrivateRoute path="/employees" isLoading={isLoading} isAuthenticated={isLogin}>
                             <Employees token={token}/>
                     </PrivateRoute>
-                    <GuestRoute path="/registration" isLoading={is_loading} isAuthenticated={is_login}>
+                    <GuestRoute path="/registration" isLoading={isLoading} isAuthenticated={isLogin}>
                             <Registration/>
                     </GuestRoute>
             </div>

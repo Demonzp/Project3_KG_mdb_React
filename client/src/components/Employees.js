@@ -32,7 +32,7 @@ const Employees = ({token}) => {
         Validation
     );
 
-    const [btn_title, setBtnTitle] = useState(null);
+    const [btnTitle, setBtnTitle] = useState(null);
     const [title, setTitle] = useState('');
     const [editEmployeeId, setEditEmployeeId] = useState('');
     const [modal, setModal] = useState(false);
@@ -45,7 +45,7 @@ const Employees = ({token}) => {
     } 
 
     const [pages, setPages] = useState(0);
-    const {el_paginate, el_limite, page, limit} = UsePaginator(pages);
+    const {elPaginate, elLimite, page, limit} = UsePaginator(pages);
 
     useEffect(() => {
         if(page===0){
@@ -74,7 +74,6 @@ const Employees = ({token}) => {
         setEmployees(data.docs);
     };
 
-    // GET (+ mongoose-pagination)
     const getEmployees = ()=>{
         return axios({
             method: 'get',
@@ -164,7 +163,7 @@ const Employees = ({token}) => {
     }
 
     function submit(){
-        if(btn_title==='Add'){
+        if(btnTitle==='Add'){
             addEmployee();
         }else{
             updateEmployee();
@@ -182,13 +181,13 @@ const Employees = ({token}) => {
                 handleChange={handleChange}
                 handleModalSubmit={handleSubmit}
                 title={title}
-                btn_title={btn_title} 
+                btnTitle={btnTitle} 
                 values={values}
                 errors={errors}
             />
             <div>
-                { el_limite }
-                { el_paginate }
+                { elLimite }
+                { elPaginate }
                 <Table>
                     <thead>
                         <tr>
@@ -219,7 +218,7 @@ const Employees = ({token}) => {
                         ))}
                     </tbody>
                 </Table>
-                { el_paginate }
+                { elPaginate }
             </div>
         </div>
     );
